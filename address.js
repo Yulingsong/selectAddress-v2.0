@@ -59,7 +59,13 @@ var yls_address = {
                 '</div></div></div></div>';
 
             addNode("div", thisInnerHtml, "yls_address_choose", '');
-
+            var a = document.documentElement.clientHeight * 0.4;
+            var b = a - 50;
+            var c = b + 'px';
+            // console.log(c);
+            $("#yls_address_main").animate({
+                top: c,
+            }, 200);
             //绑定关闭按钮方法
             document.getElementsByClassName('yls_address_pop_cancel')[0].addEventListener("click",hideAddress,false);
             document.getElementsByClassName('yls_address_bg')[0].addEventListener("click",hideAddress,false);
@@ -309,7 +315,12 @@ var yls_address = {
          *
          */
         function hideAddress() {
-            remove(document.getElementById("yls_address_choose"));
+            // remove(document.getElementById("yls_address_choose"));
+            setTimeout(function () {
+                remove(document.getElementById("yls_address_choose"));
+            }, 200);
+
+            $("#yls_address_main").animate({top: '100%',}, 200);
             toggleBody(0);
         }
         /**
