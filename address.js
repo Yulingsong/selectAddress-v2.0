@@ -22,11 +22,10 @@ var yls_address = {
             getData(0, 1, thisStartName[0],1);//获取数据
         } else {
             console.log('初始值出问题了');
+            return false;
         }
 
-        //绑定关闭按钮方法
-        document.getElementsByClassName('yls_address_pop_cancel')[0].addEventListener("click",hideAddress,false);
-        document.getElementsByClassName('yls_address_bg')[0].addEventListener("click",hideAddress,false);
+
         /**
          *
          初始化弹出框的html，去除一些样式
@@ -60,6 +59,12 @@ var yls_address = {
                 '</div></div></div></div>';
 
             addNode("div", thisInnerHtml, "yls_address_choose", '');
+
+            //绑定关闭按钮方法
+            document.getElementsByClassName('yls_address_pop_cancel')[0].addEventListener("click",hideAddress,false);
+            document.getElementsByClassName('yls_address_bg')[0].addEventListener("click",hideAddress,false);
+
+            toggleBody(1);
             for(var i = 1; i <= thisStartId.length;i++){
                 //获取每个地址列表
                 var ad = document.getElementById(ylsAd + i);
@@ -305,6 +310,7 @@ var yls_address = {
          */
         function hideAddress() {
             remove(document.getElementById("yls_address_choose"));
+            toggleBody(0);
         }
         /**
          *
@@ -346,6 +352,16 @@ var yls_address = {
             var _parentElement = _element.parentNode;//找到父元素，然后删除
             if (_parentElement) {
                 _parentElement.removeChild(_element);
+            }
+        }
+
+        function toggleBody(isPin) {
+            if (isPin) {
+                document.body.style.height = '100vh'
+                document.body.style['overflow-y'] = 'hidden'
+            } else {
+                document.body.style.height = 'unset'
+                document.body.style['overflow-y'] = 'auto'
             }
         }
     }
